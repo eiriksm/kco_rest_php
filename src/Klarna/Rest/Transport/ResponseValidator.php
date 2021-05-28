@@ -165,6 +165,10 @@ class ResponseValidator
     {
         $location = $this->response->getHeader('Location');
         if (empty($location)) {
+            // Could be lowercase.
+            $location = $this->response->getHeader('location');
+        }
+        if (empty($location)) {
             throw new \RuntimeException('Response is missing a Location header');
         }
         return $location[0];
